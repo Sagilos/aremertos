@@ -1,0 +1,71 @@
+# Web-service backend reference
+
+## Scope
+Reference architecture for production web-service backends.
+Project specifications define functionality, constraints and exceptions.
+Compliance depends on applicability, implementation and organisational review;
+this document is not evidence of legal compliance.
+
+## Architecture defaults
+| Area | Default | Rationale / exceptions |
+|---|---|---|
+| Structure | Modular monolith | Operational simplicity; split services for demonstrated isolation or scaling needs |
+| Framework | Maintained, supported framework | Built-in validation, security controls, migrations and testing |
+| API | HTTP/JSON with OpenAPI | Explicit, testable client/server contract |
+| Storage | Relational database | Transactions, constraints and predictable consistency |
+| Async work | Durable queue when needed | Background processing with retry and duplicate handling |
+| Cache | Optional, disposable | Performance optimisation; not the authoritative store |
+| Deployment | Reproducible application + infrastructure | Consistent environments and traceable changes |
+
+## Project-selected technologies
+Language/runtime: [name + supported version]
+Framework: [name + version]
+Database: [name + version]
+Identity provider: [...]
+Hosting/region: [...]
+Queue/cache/object storage: [none or selection]
+Observability and CI/CD: [...]
+
+## Design properties
+- Explicit domain/module boundaries; business logic independent of HTTP.
+- Validated API schemas; consistent errors; bounded pagination and payloads.
+- Database-enforced invariants; explicit transaction/concurrency boundaries.
+- Defined idempotency, timeouts, retries and failure behaviour.
+- Backward-compatible deployment and migration strategy.
+
+## Security properties
+- Threat model covering assets, trust boundaries and abuse cases.
+- Server-side object/action/tenant authorization; deny-by-default access.
+- Managed identity, least privilege and privileged-access protection.
+- Secure session lifecycle, secret management and encryption.
+- Controls for injection, SSRF, CSRF and resource exhaustion as applicable.
+- Redacted operational logs; protected, purpose-defined audit records.
+- Dependency inventory, vulnerability handling and security verification.
+
+## EU compliance design record
+For each applicable obligation:
+law/jurisdiction → applicability → owner → technical control → evidence.
+
+Record:
+- Personal-data categories, purposes, lawful bases and processing roles.
+- Data flows, locations, subprocessors and transfer arrangements.
+- Retention, deletion, backup expiry and data-subject request workflows.
+- Consent/tracking requirements where applicable.
+- Required assessments, contracts and accountable approvals.
+- Incident reporting triggers, recipients and deadlines.
+- Sector-specific requirements and effective dates.
+
+## Operational properties
+- Explicit availability/latency objectives and capacity assumptions.
+- Health checks, graceful shutdown and resource limits.
+- Metrics, traces, alerts and incident runbooks.
+- Encrypted backups; tested restoration against defined RPO/RTO.
+- Isolated environments and controlled production access.
+
+## Verification evidence
+API contract; architecture/data-flow diagrams; automated tests;
+authorization and tenant-isolation tests; security scan results;
+migration/recovery tests; SBOM; operational runbooks; compliance record.
+
+## Decision format
+Topic | Selected approach | Reason | Alternatives | Consequences
