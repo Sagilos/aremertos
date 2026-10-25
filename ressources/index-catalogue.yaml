@@ -1,7 +1,0 @@
-items:
-  - id: REQ-DEV-001
-    type: requirement
-    title: Chaque changement logiciel doit être vérifié
-    applies_to:
-      - software-project
-    document: requirements/REQ-DEV-001.md
